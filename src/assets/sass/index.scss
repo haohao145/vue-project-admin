@@ -1,0 +1,503 @@
+@import "normalize"; //修改css 中的一些小的 默认样式问题 api: https://github.com/necolas/normalize.css/
+@import "variable"; // 主题色彩变量
+@import "mixin"; //混入  存放一些  设置重复项的方法
+@import "zdy"; //重写 的  样式
+
+
+// 初始化样式 和 自己的元素样式
+html,
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  // background: #303133;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.15;
+  color: #303133;
+  // background-color: rgb(255, 255, 255);
+}
+
+a {
+  // color: mix(#fff, $--color-primary, 20%);
+  text-decoration: none;
+
+  &:focus,
+  &:hover {
+    // color: $--color-primary;
+    text-decoration: underline;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+img {
+  vertical-align: middle;
+}
+
+#app {
+  height: 100%;
+}
+
+.zdy-w {
+  width: 100%;
+  height: 100%;
+}
+
+//登录页样式 -----------------------------------------------------------------------------------------------------
+.login {
+  width: 100%;
+  height: 100%;
+  @include linearleftTop(rgb(2, 110, 233), rgb(3, 191, 248));
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+
+  .form {
+    width: 900px;
+    height: 500px;
+    // @include linearleftTop(rgb(3, 191, 248), rgb(2, 110, 233));
+    background: rgba(255, 255, 255, 1);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row nowrap;
+
+    &-img {
+      flex: 0 0 60%;
+      height: 100%;
+    }
+
+    &-form {
+      flex: 1 1 auto;
+      height: 100%;
+      padding: 30px 20px;
+      @include box-sizing();
+    }
+  }
+}
+
+// 首页头部导航栏菜单--------------------------------------------------------------------------------------------------
+.site-navbar {
+  width: 100%;
+  height: 50px;
+  background: $navbar--background-color;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  //正常情况下头部的选项颜色
+  &--default {
+    .site-navbar__body {
+      background-color: #fff;
+    }
+
+    .el-menu {
+
+      >.el-menu-item,
+      >.el-submenu>.el-submenu__title {
+        color: #fff;
+
+        &:focus,
+        &:hover {
+          color: #fff;
+          background-color: mix(#000, #ffffff, 3%);
+        }
+      }
+
+      >.el-menu-item.is-active,
+      >.el-submenu.is-active>.el-submenu__title {
+        border-bottom-color: mix(#000, #ffffff, 85%);
+      }
+
+      .el-menu-item i,
+      .el-submenu__title i,
+      .el-dropdown {
+        color: #636363;
+      }
+    }
+
+    .el-menu--popup-bottom-start {
+      background-color: $navbar--background-color;
+    }
+  }
+
+  //反向的情况
+  &--inverse {
+    .site-navbar__body {
+      background-color: transparent;
+    }
+
+    .el-menu {
+
+      >.el-menu-item,
+      >.el-submenu>.el-submenu__title {
+        color: #fff;
+
+        &:focus,
+        &:hover {
+          color: #fff;
+          background-color: mix(#000, $navbar--background-color, 5%);
+          // background-color: #303133;
+        }
+      }
+
+      >.el-menu-item.is-active,
+      >.el-submenu.is-active>.el-submenu__title {
+        border-bottom-color: mix(#fff, $navbar--background-color, 85%);
+      }
+
+      .el-menu-item i,
+      .el-submenu__title i,
+      .el-dropdown {
+        color: #fff;
+      }
+    }
+
+    .el-menu--popup-bottom-start {
+      background-color: $navbar--background-color;
+    }
+  }
+
+  &__header {
+    position: relative;
+    float: left;
+    width: 230px;
+    height: 50px;
+    overflow: hidden;
+
+  }
+
+  &__brand {
+    display: table-cell;
+    vertical-align: middle;
+    width: 230px;
+    height: 50px;
+    margin: 0;
+    line-height: 50px;
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #fff;
+
+    &-lg,
+    &-mini {
+      margin: 0 5px;
+      color: #fff;
+
+      &:focus,
+      &:hover {
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+
+    &-mini {
+      display: none;
+    }
+  }
+
+  &__switch {
+    font-size: 18px;
+    border-bottom: none !important;
+  }
+
+  &__avatar {
+    border-bottom: none !important;
+
+    * {
+      vertical-align: inherit;
+    }
+
+    .el-dropdown-link {
+      >img {
+        width: 36px;
+        height: auto;
+        margin-right: 5px;
+        border-radius: 100%;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  &__body {
+    position: relative;
+    margin-left: 230px;
+    padding-right: 15px;
+    background-color: #fff;
+    height: 100%;
+  }
+
+  &__menu {
+    float: left;
+    background-color: transparent;
+    border-bottom: 0;
+
+    &--right {
+      float: right;
+    }
+
+    a:focus,
+    a:hover {
+      text-decoration: none;
+    }
+
+    .el-menu-item,
+    .el-submenu>.el-submenu__title {
+      height: 50px;
+      line-height: 50px;
+    }
+
+    .el-submenu>.el-menu {
+      top: 55px;
+    }
+
+    .el-badge {
+      display: inline;
+      z-index: 2;
+
+      &__content {
+        line-height: 16px;
+      }
+    }
+  }
+
+  .zsyhlogo {
+    width: 30px;
+    height: 30px;
+    margin: 10px 0;
+    background: url("~@/assets/img/icon/zsyhlogo.png") no-repeat center/100%;
+  }
+
+
+}
+
+
+//首页左侧导航栏缩进去 只显示图标-------------------------------------------------------------------------------------
+/* Sidebar fold
+------------------------------ */
+.site-sidebar--fold {
+
+  .site-navbar__header,
+  .site-navbar__brand,
+  .site-sidebar,
+  .site-sidebar__inner,
+  .el-menu.site-sidebar__menu {
+    width: 64px;
+  }
+
+  .site-navbar__body,
+  .site-content__wrapper {
+    margin-left: 64px;
+  }
+
+  .main-content {
+    left: 64px;
+  }
+
+  .site-navbar__brand {
+    &-lg {
+      display: none;
+    }
+
+    &-mini {
+      display: inline-block;
+    }
+  }
+
+  .site-sidebar,
+  .site-sidebar__inner {
+    overflow: initial;
+  }
+
+  .site-sidebar__menu-icon {
+    margin-right: 0;
+    font-size: 20px;
+  }
+
+  .site-content--tabs>.el-tabs>.el-tabs__header {
+    left: 64px;
+  }
+}
+
+// animation  左侧菜单缩进的动画 ---------------------------------------------------------------------------------
+.site-navbar__header,
+.site-navbar__brand,
+.site-navbar__body,
+.site-sidebar,
+.site-sidebar__inner,
+.site-sidebar__menu.el-menu,
+.site-sidebar__menu-icon,
+.site-content__wrapper,
+.main-content,
+.site-content--tabs>.el-tabs .el-tabs__header {
+  transition: inline-block .3s, left .3s, width .3s, margin-left .3s, font-size .3s;
+}
+
+
+
+// 首页左侧导航栏菜单--------------------------------------------------------------------------------------------------
+.site-sidebar {
+  width: 230px;
+  // height: 100%;
+  // background: $sidebar--background-color-dark;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  bottom: 0;
+  color: $sidebar--color-text-dark;
+  overflow: hidden;
+  text-align: left;
+  // transition: width .3s;
+
+  &--dark,
+  &--dark-popper {
+    background-color: $sidebar--background-color-dark;
+
+    .site-sidebar__menu.el-menu,
+    >.el-menu--popup {
+      background-color: $sidebar--background-color-dark;
+
+      .el-menu-item,
+      .el-submenu>.el-submenu__title {
+        color: $sidebar--color-text-dark;
+
+        &:focus,
+        &:hover {
+          //mix(color1,color2,混合比例)   sass 颜色混合方法 设置第一个
+          color: mix(#fff, $sidebar--color-text-dark, 50%);
+          background-color: mix(#fff, $sidebar--background-color-dark, 2.5%);
+        }
+      }
+
+      .el-menu,
+      .el-submenu.is-opened {
+        background-color: mix(#000, $sidebar--background-color-dark, 15%);
+      }
+
+      .el-menu-item.is-active,
+      .el-submenu.is-active>.el-submenu__title {
+        color: mix(#fff, $sidebar--color-text-dark, 80%);
+      }
+    }
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    width: 250px;
+    height: 100%;
+    padding-bottom: 15px;
+    overflow-y: scroll;
+    @include box-sizing();
+  }
+
+  &__menu.el-menu {
+    width: 230px;
+    border-right: 0;
+  }
+
+  &__menu-icon {
+    width: 24px;
+    margin-right: 5px;
+    text-align: center;
+    font-size: 16px;
+    color: inherit !important;
+  }
+
+}
+
+//   首页内容区域 mian-content 样式--------------------------------------------------------------------------------
+.main-content {
+  background: $content--background-color;
+  position: fixed;
+  top: 50px;
+  left: 230px;
+  right: 0;
+  bottom: 0;
+  // transition: left .3s;
+}
+
+.site-content {
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  @include box-sizing();
+
+  &__wrapper {
+    position: relative;
+    padding-top: 50px;
+    margin-left: 230px;
+    min-height: 100%;
+    background: $content--background-color;
+  }
+
+  &--tabs {
+    padding: 55px 0 0;
+  }
+
+  >.el-tabs {
+    >.el-tabs__header {
+      position: fixed;
+      top: 50px;
+      left: 230px;
+      right: 0;
+      z-index: 930;
+      padding: 0 55px 0 15px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .12), 0 0 6px 0 rgba(0, 0, 0, .04);
+      background-color: #fff;
+
+      >.el-tabs__nav-wrap {
+        margin-bottom: 0;
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+
+    >.el-tabs__content {
+      padding: 0 15px 15px;
+
+      >.site-tabs__tools {
+        position: fixed;
+        top: 50px;
+        right: 0;
+        z-index: 931;
+        height: 40px;
+        padding: 0 12px;
+        font-size: 16px;
+        line-height: 40px;
+        background-color: $content--background-color;
+        cursor: pointer;
+
+        .el-icon--right {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  .zdy-card {
+    width: 100%;
+    background: #fff;
+    padding: 15px;
+    @include box-sizing();
+  }
+}
